@@ -1,12 +1,12 @@
 import './App.css';
-import Counter from './components/Counter';
+import Login from './components/Login';
+import Welcome from './components/Welcome';
 
 function App() {
   return (
     <div className="App">
-
-      <Counter />
-
+      <Login />
+      <Welcome />
     </div>
   );
 }
