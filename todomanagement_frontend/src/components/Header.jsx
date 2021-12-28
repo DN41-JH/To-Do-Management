@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { AuthenticationService } from '../services/AuthenticationService';
   
 export default class Header extends React.Component {
     handleLogOut() {
@@ -8,7 +9,7 @@ export default class Header extends React.Component {
     }
 
     render() {
-        const isLoggedIn = window.sessionStorage.getItem("Username") ? true : false;
+        const isLoggedIn = AuthenticationService.isLoggedIn();
 
         return (
             <header>

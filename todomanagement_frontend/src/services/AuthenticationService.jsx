@@ -11,4 +11,8 @@ export const AuthenticationService = {
         // return axios.post('/checkStatus/', checkStatusRequest);
         return true;
     },
+
+    isLoggedIn: function() {
+        return window.sessionStorage.getItem("Username") ? true : false;
+    }
 }
