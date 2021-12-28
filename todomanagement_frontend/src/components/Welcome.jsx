@@ -5,11 +5,14 @@ export default class Welcome extends React.Component {
     render() {
         return (
             <div>
-                Welcome {this.props.match.params.name}!
+                <h1> Welcome! </h1>
 
-                <br/>
+                <div className="container">
+                    Welcome {this.props.match.params.name},
+                    <br/>
+                    Please Manage Your Todos <Link to='/todos/'> Here </Link>
 
-                Manage Your Todos <Link to='/todos/'> Here </Link>
+                </div>
             </div>
         );        
     }
