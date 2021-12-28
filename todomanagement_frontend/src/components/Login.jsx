@@ -1,4 +1,5 @@
 import React from 'react';
+import { AuthenticationService } from '../services/AuthenticationService';
   
 export default class Login extends React.Component {
 
@@ -22,6 +23,12 @@ export default class Login extends React.Component {
     }
 
     handleLogin() {
+        const loginInfo = {
+            Username: this.state.username,
+            Password: this.state.password,
+        };
+
+        window.sessionStorage.setItem("Username", this.state.username);
         if (true) {
             window.location.href=`/welcome/${this.state.username}`;
         } else {
