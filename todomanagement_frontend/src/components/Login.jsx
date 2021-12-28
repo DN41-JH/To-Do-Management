@@ -9,21 +9,10 @@ export default class Login extends React.Component {
             username: "",
             password: "",
             isLoginFailed: false,
-            showSuccessMessage: false,
         };
 
         this.handleChange = this.handleChange.bind(this);
         this.handleLogin = this.handleLogin.bind(this);
-    }
-
-    renderLoginMessage() {
-        if (this.state.showSuccessMessage) {
-            return <div> Successful Login </div>
-        } else if (this.state.isLoginFailed) {
-            return <div> Invalid Credential </div>
-        } else {
-            return null
-        }
     }
 
     handleChange(event) {
@@ -38,7 +27,6 @@ export default class Login extends React.Component {
         } else {
             this.setState({
                 isLoginFailed: true,
-                showSuccessMessage: false,
             });
         }
     }
@@ -46,10 +34,13 @@ export default class Login extends React.Component {
     render() {
         return (
             <div>
-                {this.renderLoginMessage()}
-                User Name: <input type='text' name='username' onChange={this.handleChange}/>
-                Password: <input type='password' name='password' onChange={this.handleChange}/>
-                <button onClick={this.handleLogin}> Login </button>
+                <h1> Login </h1>
+                <div className="container">
+                    {this.state.isLoginFailed && <div className="warning"> Invalid Credential </div>}
+                    User Name: <input type='text' name='username' onChange={this.handleChange}/>
+                    Password: <input type='password' name='password' onChange={this.handleChange}/>
+                    <button className="btn btn-success" onClick={this.handleLogin}> Login </button>
+                </div>
             </div>
         );        
     }
