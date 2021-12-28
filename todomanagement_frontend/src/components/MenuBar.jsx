@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { AuthenticationService } from '../services/AuthenticationService';
   
-export default class Header extends React.Component {
+export default class MenuBar extends React.Component {
     handleLogOut() {
         window.sessionStorage.removeItem("Username");
         window.location.href='/logout';

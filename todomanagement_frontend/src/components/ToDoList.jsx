@@ -17,7 +17,7 @@ export default class ToDoList extends React.Component {
     render() {
         return (
             <div>
-                <h1>List of Todos</h1>
+                <h1> List of Todos </h1>
 
                 <div className="container">
                     <table className="table">
@@ -45,7 +45,6 @@ export default class ToDoList extends React.Component {
                         </tbody>
                     </table>
                 </div>
-
             </div>
         );        
     }
