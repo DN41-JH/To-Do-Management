@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
 import Login from './components/Login';
 import Welcome from './components/Welcome';
 import ErrorPage from './components/ErrorPage';
+import ToDoList from './components/ToDoList';
 
 function App() {
   return (
@@ -10,7 +11,7 @@ function App() {
       <Router>
 
         <Switch>
-          
+
           <Route exact path="/">
             <Login />
           </Route>
@@ -20,6 +21,10 @@ function App() {
           </Route>
 
           <Route path="/welcome/:name" component={Welcome} />
+
+          <Route exact path="/todos">
+            <ToDoList />
+          </Route>
 
           <Route component={ErrorPage} />
 
