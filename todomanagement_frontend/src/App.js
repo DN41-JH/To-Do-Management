@@ -1,12 +1,31 @@
 import './App.css';
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
 import Login from './components/Login';
 import Welcome from './components/Welcome';
+import ErrorPage from './components/ErrorPage';
 
 function App() {
   return (
     <div className="App">
-      <Login />
-      <Welcome />
+      <Router>
+
+        <Switch>
+          
+          <Route exact path="/">
+            <Login />
+          </Route>
+
+          <Route exact path="/login">
+            <Login />
+          </Route>
+
+          <Route path="/welcome/:name" component={Welcome} />
+
+          <Route component={ErrorPage} />
+
+        </Switch>
+
+      </Router>
     </div>
   );
 }

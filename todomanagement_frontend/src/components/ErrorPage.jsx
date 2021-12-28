@@ -1,6 +1,6 @@
 import React from 'react';
-
-export default class Welcome extends React.Component {
+  
+export default class ErrorPage extends React.Component {
 
     constructor(props) {
         super(props);
@@ -9,7 +9,7 @@ export default class Welcome extends React.Component {
     render() {
         return (
             <div>
-                Welcome {this.props.match.params.name}
+                Page not Found, Please Contact Support at jliu115@illinois.edu.
             </div>
         );        
     }

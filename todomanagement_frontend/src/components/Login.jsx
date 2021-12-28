@@ -33,11 +33,8 @@ export default class Login extends React.Component {
     }
 
     handleLogin() {
-        if (true) { // 
-            this.setState({
-                isLoginFailed: false,
-                showSuccessMessage: true,
-            });
+        if (true) {
+            window.location.href=`/welcome/${this.state.username}`;
         } else {
             this.setState({
                 isLoginFailed: true,
