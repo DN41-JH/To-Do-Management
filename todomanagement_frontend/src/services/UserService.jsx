@@ -1,6 +1,6 @@
 import axios from "../axios";
 
-export const AuthenticationService = {
+export const UserService = {
     login: function(loginInfo) {
         const loginRequest = {
             Username: loginInfo.Username,
@@ -11,8 +11,4 @@ export const AuthenticationService = {
         // return axios.post('/checkStatus/', checkStatusRequest);
         return true;
     },
-
-    isLoggedIn: function() {
-        return window.sessionStorage.getItem("Username") ? true : false;
-    }
 }
