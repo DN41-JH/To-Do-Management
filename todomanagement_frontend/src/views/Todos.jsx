@@ -14,11 +14,12 @@ export default class Todos extends React.Component {
             errorMessage: null,
         };
 
+        this.handleUpdate = this.handleUpdate.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
     }
 
     componentDidMount() {
-        this.renderTodoList();
+        this.getTodos();
     }
 
     handleDelete(username, id) {
@@ -29,7 +30,7 @@ export default class Todos extends React.Component {
                     isError: false,
                     errorMessage: null,
                 });
-                this.renderTodoList();
+                this.getTodos();
             })
             .catch((error) => this.setState({
                 isError: true,
@@ -37,7 +38,11 @@ export default class Todos extends React.Component {
             }));
     }
 
-    renderTodoList() {
+    handleUpdate(username, id) {
+
+    }
+
+    getTodos() {
         if (AuthenticationService.isLoggedIn()) {
             const username = window.sessionStorage.getItem("Username");
 
@@ -62,7 +67,11 @@ export default class Todos extends React.Component {
                 <div>
                     <h1> List of Todos </h1>
                     {this.state.message ? <div className="alert alert-success"> {this.state.message} </div> : null}
-                    <ToDoList todos={this.state.todos} onDelete={this.handleDelete}/>
+                    <ToDoList 
+                        todos={this.state.todos} 
+                        onUpdate={this.handleUpdate}
+                        onDelete={this.handleDelete}
+                    />
                 </div>
             )
         }

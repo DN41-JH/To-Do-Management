@@ -18,6 +18,7 @@ export default class ToDoList extends React.Component {
                             <th> Description </th>
                             <th> Target Date </th>
                             <th> Is Completed </th>
+                            <th> Update </th>
                             <th> Delete </th>
                         </tr>
                     </thead>
@@ -30,6 +31,7 @@ export default class ToDoList extends React.Component {
                                     <td> {todo.description} </td>
                                     <td> {todo.targetDate} </td>
                                     <td> {todo.done.toString()} </td>
+                                    <td> <button className="btn btn-success" onClick={() => this.props.onUpdate(username, todo.id)}> Update </button>  </td>
                                     <td> <button className="btn btn-warning" onClick={() => this.props.onDelete(username, todo.id)}> Delete </button>  </td>
                                 </tr>
                             )
