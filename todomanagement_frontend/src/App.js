@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route} from "react-router-dom"
 import Login from './views/Login';
 import Logout from './views/Logout';
 import Welcome from './views/Welcome';
+import NewTodo from './views/NewTodo';
 import ErrorPage from './views/ErrorPage';
 import Todos from './views/Todos';
 import MenuBar from './components/MenuBar';
@@ -30,11 +31,13 @@ function App() {
             <Logout />
           </Route>
 
-          <Route path="/welcome/:name" component={Welcome} />
+          <Route path="/welcome/:name" component={Welcome}/>
 
           <Route exact path="/todos">
             <Todos />
           </Route>
+
+          <Route path="/todos/:id" component={NewTodo}/>
 
           <Route component={ErrorPage} />
 

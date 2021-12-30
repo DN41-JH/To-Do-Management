@@ -39,6 +39,7 @@ export default class Todos extends React.Component {
     }
 
     handleUpdate(username, id) {
+        window.location.href=`/todos/${id}`;
 
     }
 
