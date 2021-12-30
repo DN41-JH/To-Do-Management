@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Switch, Route} from "react-router-dom"
 import Login from './views/Login';
 import Logout from './views/Logout';
 import Welcome from './views/Welcome';
-import NewTodo from './views/NewTodo';
+import TodoUpdate from './views/TodoUpdate';
 import ErrorPage from './views/ErrorPage';
 import Todos from './views/Todos';
 import MenuBar from './components/MenuBar';
@@ -37,7 +37,7 @@ function App() {
             <Todos />
           </Route>
 
-          <Route path="/todos/:id" component={NewTodo}/>
+          <Route path="/todos/:id" component={TodoUpdate}/>
 
           <Route component={ErrorPage} />
 
