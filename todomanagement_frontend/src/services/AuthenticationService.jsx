@@ -14,5 +14,5 @@ export const AuthenticationService = {
 
     isLoggedIn: function() {
         return window.sessionStorage.getItem("Username") ? true : false;
-    }
+    },
 }

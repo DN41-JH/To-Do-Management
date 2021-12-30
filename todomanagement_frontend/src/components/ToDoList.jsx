@@ -4,14 +4,6 @@ export default class ToDoList extends React.Component {
 
     constructor(props) {
         super(props);
-
-        this.state = {
-            todos: [
-                {id:1, description:"Learn", done:false, targetDate:'2021-12-27'},
-                {id:2, description:"Dance", done:false, targetDate:'2021-12-25'},
-                {id:3, description:"Eat", done:false, targetDate:'2021-12-26'},
-            ],
-        }
     }
 
     render() {
@@ -33,7 +25,7 @@ export default class ToDoList extends React.Component {
 
                         <tbody>
                             {
-                                this.state.todos.map((todo) => 
+                                this.props.todos.map((todo) => 
                                     <tr key={todo.id}>
                                         <td> {todo.id} </td>
                                         <td> {todo.description} </td>
