@@ -9,18 +9,43 @@ export default class Todos extends React.Component {
 
         this.state = {
             todos: [],
+            message: null,
             isError: false,
-            errorMessage: "",
+            errorMessage: null,
         };
+
+        this.handleDelete = this.handleDelete.bind(this);
     }
 
     componentDidMount() {
+        this.renderTodoList();
+    }
+
+    handleDelete(username, id) {
+        UserService.deleteToDo(username, id)
+            .then((response) => {
+                this.setState({
+                    message: `Delete of task ${id} is successfully.`,
+                    isError: false,
+                    errorMessage: null,
+                });
+                this.renderTodoList();
+            })
+            .catch((error) => this.setState({
+                isError: true,
+                errorMessage: error.message,
+            }));
+    }
+
+    renderTodoList() {
         if (AuthenticationService.isLoggedIn()) {
-            UserService.getToDos(window.sessionStorage.getItem("Username"))
+            const username = window.sessionStorage.getItem("Username");
+
+            UserService.getToDos(username)
                 .then((response) => this.setState({
                     todos: response.data,
                     isError: false,
-                    errorMessage: "",
+                    errorMessage: null,
                 }))
                 .catch((error) => this.setState({
                     isError: true,
@@ -29,9 +54,23 @@ export default class Todos extends React.Component {
         }  
     }
 
+    renderTodos() {
+        if (this.state.isError) {
+            return <h1> Sorry, {this.state.errorMessage} </h1>
+        } else {
+            return (
+                <div>
+                    <h1> List of Todos </h1>
+                    {this.state.message ? <div className="alert alert-success"> {this.state.message} </div> : null}
+                    <ToDoList todos={this.state.todos} onDelete={this.handleDelete}/>
+                </div>
+            )
+        }
+    }
+
     render() {
         return (
-            this.state.isError ? <h1> Sorry, {this.state.errorMessage} </h1> : <ToDoList todos={this.state.todos}/>
+            this.renderTodos()
         )
     }
 };
