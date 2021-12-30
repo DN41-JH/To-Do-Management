@@ -44,7 +44,7 @@ public class TodoResource {
 	// Return the Single Task Object with {id} after being updated
 	@PutMapping("/users/{username}/todos/{id}")
 	public ResponseEntity<Todo> updateTodo(@PathVariable String username, @PathVariable long id, @RequestBody Todo todo) {
-		Todo todoUpdated = todoService.saveTodo(todo);
+		Todo todoUpdated = todoService.updateTodo(todo);
 		return new ResponseEntity<Todo>(todo, HttpStatus.OK);
 	}
 	
@@ -53,9 +53,8 @@ public class TodoResource {
 	// Return the URI of the Newly Created Task Object
 	@PostMapping("/users/{username}/todos")
 	public ResponseEntity<Void> createTodo(@PathVariable String username, @RequestBody Todo todo) {
-		Todo todoCreated = todoService.saveTodo(todo);
+		Todo todoCreated = todoService.createTodo(todo);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(todoCreated.getId()).toUri();
-		
 		return ResponseEntity.created(uri).build();
 	}
 	

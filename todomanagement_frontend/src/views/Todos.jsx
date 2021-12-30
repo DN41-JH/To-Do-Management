@@ -14,12 +14,21 @@ export default class Todos extends React.Component {
             errorMessage: null,
         };
 
+        this.handleGoCreate = this.handleGoCreate.bind(this);
         this.handleGoUpdate = this.handleGoUpdate.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
     }
 
     componentDidMount() {
         this.getTodos();
+    }
+
+    handleGoCreate() {
+        window.location.href="/todos/-1";
+    }
+
+    handleGoUpdate(id) {
+        window.location.href=`/todos/${id}`;
     }
 
     handleDelete(username, id) {
@@ -36,10 +45,6 @@ export default class Todos extends React.Component {
                 isError: true,
                 errorMessage: error.message,
             }));
-    }
-
-    handleGoUpdate(id) {
-        window.location.href=`/todos/${id}`;
     }
 
     getTodos() {
@@ -72,6 +77,7 @@ export default class Todos extends React.Component {
                         onGoUpdate={this.handleGoUpdate}
                         onDelete={this.handleDelete}
                     />
+                    <button className="btn btn-success" onClick={this.handleGoCreate}> Add More </button>
                 </div>
             )
         }

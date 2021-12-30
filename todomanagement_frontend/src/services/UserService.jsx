@@ -17,6 +17,12 @@ export const UserService = {
         return axios.put(`/users/${username}/todos/${id}`, todo);
     },
 
+    createTodo: function(username, todo) {
+        // (Must follow the EndPoint URL as specified in the backend url pattern)
+        // The new "todo" goes to the body of the request
+        return axios.post(`/users/${username}/todos`, todo);
+    },
+
     deleteToDo: function(username, id) {
         // (Must follow the EndPoint URL as specified in the backend url pattern)
         return axios.delete(`/users/${username}/todos/${id}`);

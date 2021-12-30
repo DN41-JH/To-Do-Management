@@ -11,13 +11,15 @@ export default class TodoUpdate extends React.Component {
         this.state = {
             id: this.props.match.params.id,
             description: "",
-            targetDate: moment(new Date()).format("YYYY-MM-DD"),
+            targetDate: "",
         };
 
         this.handleUpdate = this.handleUpdate.bind(this);
     }
 
     componentDidMount() {
+        if (this.state.id == -1) return; // This is for creating a new todo task, so no need to load
+
         const username = window.sessionStorage.getItem("Username");
 
         UserService.getToDo(username, this.props.match.params.id)
@@ -30,15 +32,23 @@ export default class TodoUpdate extends React.Component {
 
     handleUpdate(values) {
         const username = AuthenticationService.getUsername();
-        const updated_todo = {
+        const todo = {
             id: this.state.id,
+            username: username,
             description: values.description,
             targetDate: values.targetDate,
+            isDone: false,
         };
 
-        UserService.updateTodo(username, this.state.id, updated_todo)
-            .then((response) => window.location.href="/todos")
-            .catch((error) => console.log(error.message));
+        if (this.state.id == -1) { // Create a new todo task
+            UserService.createTodo(username, todo)
+                .then((response) => window.location.href="/todos")
+                .catch((error) => console.log(error.message));
+        } else { // Update a certain todo task
+            UserService.updateTodo(username, this.state.id, todo)
+                .then((response) => window.location.href="/todos")
+                .catch((error) => console.log(error.message));
+        }
     }
 
     validateForm(values) {
@@ -60,7 +70,7 @@ export default class TodoUpdate extends React.Component {
     render() {
         return (
             <div>
-                <h1> Update Task </h1>
+                <h1> Task </h1>
 
                 <div className="container">
                     <Formik
