@@ -11,8 +11,10 @@ export default class TodoUpdate extends React.Component {
         this.state = {
             id: this.props.match.params.id,
             description: "",
-            targetDate: moment(new Date()).format('YYYY-MM-DD'),
+            targetDate: moment(new Date()).format("YYYY-MM-DD"),
         };
+
+        this.handleUpdate = this.handleUpdate.bind(this);
     }
 
     componentDidMount() {
@@ -21,15 +23,22 @@ export default class TodoUpdate extends React.Component {
         UserService.getToDo(username, this.props.match.params.id)
             .then((response) => {this.setState({
                 description: response.data.description,
-                targetDate: moment(response.data.targetDate).format('YYYY-MM-DD'),
+                targetDate: moment(response.data.targetDate).format("YYYY-MM-DD"),
             })})
             .catch((error) => console.log(error.message));
     }
 
     handleUpdate(values) {
         const username = AuthenticationService.getUsername();
+        const updated_todo = {
+            id: this.state.id,
+            description: values.description,
+            targetDate: values.targetDate,
+        };
 
-        UserService.updateTodo(username, )
+        UserService.updateTodo(username, this.state.id, updated_todo)
+            .then((response) => window.location.href="/todos")
+            .catch((error) => console.log(error.message));
     }
 
     validateForm(values) {

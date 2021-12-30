@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 import { AuthenticationService } from '../services/AuthenticationService';
   
 export default class ToDoList extends React.Component {
@@ -15,7 +16,6 @@ export default class ToDoList extends React.Component {
                 <table className="table">
                     <thead>
                         <tr>
-                            <th> Id </th>
                             <th> Description </th>
                             <th> Target Date </th>
                             <th> Is Completed </th>
@@ -28,11 +28,10 @@ export default class ToDoList extends React.Component {
                         {
                             this.props.todos.map((todo) => 
                                 <tr key={todo.id}>
-                                    <td> {todo.id} </td>
                                     <td> {todo.description} </td>
-                                    <td> {todo.targetDate} </td>
+                                    <td> {moment(todo.targetDate).format("YYYY-MM-DD")} </td>
                                     <td> {todo.done.toString()} </td>
-                                    <td> <button className="btn btn-success" onClick={() => this.props.onUpdate(username, todo.id)}> Update </button>  </td>
+                                    <td> <button className="btn btn-success" onClick={() => this.props.onGoUpdate(todo.id)}> Update </button>  </td>
                                     <td> <button className="btn btn-warning" onClick={() => this.props.onDelete(username, todo.id)}> Delete </button>  </td>
                                 </tr>
                             )

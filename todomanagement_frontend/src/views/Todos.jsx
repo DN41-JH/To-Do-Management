@@ -14,7 +14,7 @@ export default class Todos extends React.Component {
             errorMessage: null,
         };
 
-        this.handleUpdate = this.handleUpdate.bind(this);
+        this.handleGoUpdate = this.handleGoUpdate.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
     }
 
@@ -38,9 +38,8 @@ export default class Todos extends React.Component {
             }));
     }
 
-    handleUpdate(username, id) {
+    handleGoUpdate(id) {
         window.location.href=`/todos/${id}`;
-
     }
 
     getTodos() {
@@ -70,7 +69,7 @@ export default class Todos extends React.Component {
                     {this.state.message ? <div className="alert alert-success"> {this.state.message} </div> : null}
                     <ToDoList 
                         todos={this.state.todos} 
-                        onUpdate={this.handleUpdate}
+                        onGoUpdate={this.handleGoUpdate}
                         onDelete={this.handleDelete}
                     />
                 </div>
