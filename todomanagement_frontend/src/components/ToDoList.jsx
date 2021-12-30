@@ -1,4 +1,5 @@
 import React from 'react';
+import { AuthenticationService } from '../services/AuthenticationService';
   
 export default class ToDoList extends React.Component {
 
@@ -7,7 +8,7 @@ export default class ToDoList extends React.Component {
     }
 
     render() {
-        const username = window.sessionStorage.getItem("Username");
+        const username = AuthenticationService.getUsername();
 
         return (
             <div className="container">

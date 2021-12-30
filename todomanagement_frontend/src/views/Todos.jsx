@@ -45,7 +45,7 @@ export default class Todos extends React.Component {
 
     getTodos() {
         if (AuthenticationService.isLoggedIn()) {
-            const username = window.sessionStorage.getItem("Username");
+            const username = AuthenticationService.getUsername();
 
             UserService.getToDos(username)
                 .then((response) => this.setState({

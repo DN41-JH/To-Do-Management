@@ -1,5 +1,6 @@
 import React from 'react';
 import moment from 'moment';
+import { AuthenticationService } from '../services/AuthenticationService';
 import { UserService } from '../services/UserService';
 import { Form, Formik, Field, ErrorMessage } from 'formik';
 
@@ -26,7 +27,9 @@ export default class TodoUpdate extends React.Component {
     }
 
     handleUpdate(values) {
-        console.log(values);
+        const username = AuthenticationService.getUsername();
+
+        UserService.updateTodo(username, )
     }
 
     validateForm(values) {
