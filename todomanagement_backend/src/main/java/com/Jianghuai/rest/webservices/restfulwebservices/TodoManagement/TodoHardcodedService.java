@@ -18,10 +18,19 @@ public class TodoHardcodedService {
 		todos.add(new Todo(++idCounter, "in28Minutes", "Learn", new Date(), false));
 	}
 	
-	
-	
 	public List<Todo> findAll() {
 		return todos;
+	}
+	
+	public Todo saveTodo(Todo todo) {
+		if ((todo.getId() == -1) || (todo.getId() == 0)) {
+			todo.setId(++idCounter);
+		} else {
+			deleteById(todo.getId());
+		}
+		
+		todos.add(todo);
+		return todo;
 	}
 	
 	public Todo deleteById(long id) {

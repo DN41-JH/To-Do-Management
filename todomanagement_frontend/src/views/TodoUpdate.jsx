@@ -1,5 +1,6 @@
 import React from 'react';
 import moment from 'moment';
+import { UserService } from '../services/UserService';
 import { Form, Formik, Field, ErrorMessage } from 'formik';
 
 export default class TodoUpdate extends React.Component {
@@ -8,9 +9,20 @@ export default class TodoUpdate extends React.Component {
 
         this.state = {
             id: this.props.match.params.id,
-            description: "asdf",
+            description: "",
             targetDate: moment(new Date()).format('YYYY-MM-DD'),
         };
+    }
+
+    componentDidMount() {
+        const username = window.sessionStorage.getItem("Username");
+
+        UserService.getToDo(username, this.props.match.params.id)
+            .then((response) => {this.setState({
+                description: response.data.description,
+                targetDate: moment(response.data.targetDate).format('YYYY-MM-DD'),
+            })})
+            .catch((error) => console.log(error.message));
     }
 
     handleUpdate(values) {
@@ -45,6 +57,7 @@ export default class TodoUpdate extends React.Component {
                         validate={this.validateForm}
                         validateOnChange={false}
                         validateOnBlur={false}
+                        enableReinitialize={true}
                     > 
                         {(props) => (
                             <Form>
