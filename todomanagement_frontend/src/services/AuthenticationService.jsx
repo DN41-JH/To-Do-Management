@@ -1,15 +1,25 @@
 import axios from "../axios";
 
 export const AuthenticationService = {
-    login: function(loginInfo) {
-        const loginRequest = {
-            Username: loginInfo.Username,
-            Password: loginInfo.Password,
-        }
+    setupAxiosInterceptors(basicAuthHeader) {
+        console.log("starting setupAxiosInterceptorsssssssssssssssssss");
+        axios.interceptors.request.use((config) => {
+                config.headers.authorization = basicAuthHeader;
+                console.log("basicAuthHeader");
+                return config;
+            }
+        );
+    },
 
-        // (Must follow the EndPoint URL as specified in the backend url pattern)
-        // return axios.post('/checkStatus/', checkStatusRequest);
-        return true;
+    executeAuthorization: function(username, password) {
+        const basicAuthHeader = "Basic " + window.btoa(username + ':' + password);
+        const request = {
+            headers: {
+                authorization: basicAuthHeader,
+            }
+        };
+
+        return axios.get("/basic_auth", request);
     },
 
     isLoggedIn: function() {
@@ -18,5 +28,9 @@ export const AuthenticationService = {
 
     getUsername: function() {
         return window.sessionStorage.getItem("Username");
-    }
+    },
+
+    logout: function() {
+        window.sessionStorage.removeItem("Username");
+    },
 }

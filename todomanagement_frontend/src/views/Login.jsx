@@ -23,19 +23,16 @@ export default class Login extends React.Component {
     }
 
     handleLogin() {
-        const loginInfo = {
-            Username: this.state.username,
-            Password: this.state.password,
-        };
-
-        window.sessionStorage.setItem("Username", this.state.username);
-        if (true) {
-            window.location.href=`/welcome/${this.state.username}`;
-        } else {
-            this.setState({
-                isLoginFailed: true,
-            });
-        }
+        AuthenticationService.executeAuthorization(this.state.username, this.state.password)
+            .then((response) => {
+                window.sessionStorage.setItem("Username", this.state.username);
+                const basicAuthHeader = "Basic " + window.btoa(this.state.username + ':' + this.state.password);
+                AuthenticationService.setupAxiosInterceptors(basicAuthHeader);
+                window.location.href=`/welcome/${this.state.username}`;
+            })
+            .catch((error) => this.setState({
+                isloginFailed: true,
+            }));
     }
 
     render() {
