@@ -50,8 +50,12 @@ public class TodoResource_JPA {
 	// Return the Single Task Object with {id} after being updated
 	@PutMapping("/jpa/users/{username}/todos/{id}")
 	public ResponseEntity<Todo> updateTodo(@PathVariable String username, @PathVariable long id, @RequestBody Todo todo) {
-		Todo todoUpdated = todoService.updateTodo(todo);
+		todo.setUsername(username);
+		Todo todoUpdated = todoJpaRepository.save(todo);
 		return new ResponseEntity<Todo>(todo, HttpStatus.OK);
+		
+		// Todo todoUpdated = todoService.updateTodo(todo);
+		// return new ResponseEntity<Todo>(todo, HttpStatus.OK);
 	}
 	
 	// Method: POST
@@ -59,9 +63,14 @@ public class TodoResource_JPA {
 	// Return the URI of the Newly Created Task Object
 	@PostMapping("/jpa/users/{username}/todos")
 	public ResponseEntity<Void> createTodo(@PathVariable String username, @RequestBody Todo todo) {
-		Todo todoCreated = todoService.createTodo(todo);
+		todo.setUsername(username);
+		Todo todoCreated = todoJpaRepository.save(todo);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(todoCreated.getId()).toUri();
 		return ResponseEntity.created(uri).build();
+		
+		// Todo todoCreated = todoService.createTodo(todo);
+		// URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(todoCreated.getId()).toUri();
+		// return ResponseEntity.created(uri).build();
 	}
 	
     // Method: DELETE
@@ -69,6 +78,9 @@ public class TodoResource_JPA {
 	// Delete the Single Task Object with {id} from the User
 	@DeleteMapping("/jpa/users/{username}/todos/{id}")
 	public ResponseEntity<Void> deleteTodo(@PathVariable String username, @PathVariable long id) {		
-		return (todoService.deleteById(id) == null) ? (ResponseEntity<Void>) ResponseEntity.notFound() : ResponseEntity.noContent().build();
+		todoJpaRepository.deleteById(id);
+		return ResponseEntity.noContent().build();
+
+		// return (todoService.deleteById(id) == null) ? (ResponseEntity<Void>) ResponseEntity.notFound() : ResponseEntity.noContent().build();
 	}
 }
