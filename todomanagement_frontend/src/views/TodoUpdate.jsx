@@ -9,7 +9,7 @@ export default class TodoUpdate extends React.Component {
         super(props);
 
         this.state = {
-            id: this.props.match.params.id,
+            id: parseInt(this.props.match.params.id),
             description: "",
             targetDate: "",
             isCompleted: "No",
@@ -23,7 +23,7 @@ export default class TodoUpdate extends React.Component {
 
         const username = window.sessionStorage.getItem("Username");
 
-        UserService.getToDo(username, this.props.match.params.id)
+        UserService.getToDo(username, this.state.id)
             .then((response) => {this.setState({
                 description: response.data.description,
                 targetDate: moment(response.data.targetDate).format("YYYY-MM-DD"),
@@ -74,7 +74,6 @@ export default class TodoUpdate extends React.Component {
     }
 
     render() {
-        console.log(this.state);
         return (
             <div>
                 <h1> Task List </h1>

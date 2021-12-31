@@ -24,7 +24,7 @@ export default class Todos extends React.Component {
     }
 
     handleGoCreate() {
-        window.location.href="/todos/-1";
+        window.location.href=`/todos/${-1}`;
     }
 
     handleGoUpdate(id) {
