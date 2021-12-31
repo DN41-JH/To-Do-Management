@@ -19,7 +19,7 @@ export default class TodoUpdate extends React.Component {
     }
 
     componentDidMount() {
-        if (this.state.id == -1) return; // This is for creating a new todo task, so no need to load
+        if (this.state.id === -1) return; // This is for creating a new todo task, so no need to load
 
         const username = window.sessionStorage.getItem("Username");
 
@@ -42,7 +42,7 @@ export default class TodoUpdate extends React.Component {
             done: (values.isCompleted === "Yes") ? true : false,
         };
 
-        if (this.state.id == -1) { // Create a new todo task
+        if (this.state.id === -1) { // Create a new todo task
             UserService.createTodo(username, todo)
                 .then((response) => window.location.href="/todos")
                 .catch((error) => console.log(error.message));
@@ -66,7 +66,7 @@ export default class TodoUpdate extends React.Component {
             error.targetDate = "Please Enter a Valid Target Date";
         }
 
-        if ((values.isCompleted != "Yes") && (values.isCompleted != "No")) {
+        if ((values.isCompleted !== "Yes") && (values.isCompleted !== "No")) {
             error.isCompleted = "Please Enter either Yes or No";
         }
 

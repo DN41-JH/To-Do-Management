@@ -1,10 +1,18 @@
 package com.Jianghuai.rest.webservices.restfulwebservices.TodoManagement;
 
-import java.util.Date;
 import java.util.Objects;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class Todo {
+	
+	@Id
+	@GeneratedValue
 	private long id;
+	
 	private String username;
 	private String description;
 	private String targetDate;
