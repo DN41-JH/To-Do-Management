@@ -77,7 +77,7 @@ export default class Todos extends React.Component {
                         onGoUpdate={this.handleGoUpdate}
                         onDelete={this.handleDelete}
                     />
-                    <button className="btn btn-success" onClick={this.handleGoCreate}> Add More </button>
+                    <button className="btn btn-primary" onClick={this.handleGoCreate}> Add More </button>
                 </div>
             )
         }

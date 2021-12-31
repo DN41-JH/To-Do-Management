@@ -34,7 +34,7 @@ export default class ToDoList extends React.Component {
                                 <tr key={todo.id}>
                                     <td> {todo.description} </td>
                                     <td style={this.getStyle(todo.targetDate)}> {moment(todo.targetDate).format("YYYY-MM-DD")} </td>
-                                    <td> {todo.done.toString()} </td>
+                                    <td> {todo.done ? "Yes" : "No"} </td>
                                     <td> <button className="btn btn-success" onClick={() => this.props.onGoUpdate(todo.id)}> Update </button>  </td>
                                     <td> <button className="btn btn-warning" onClick={() => this.props.onDelete(username, todo.id)}> Delete </button>  </td>
                                 </tr>

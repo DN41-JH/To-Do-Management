@@ -12,6 +12,7 @@ export default class TodoUpdate extends React.Component {
             id: this.props.match.params.id,
             description: "",
             targetDate: "",
+            isCompleted: "No",
         };
 
         this.handleUpdate = this.handleUpdate.bind(this);
@@ -26,6 +27,7 @@ export default class TodoUpdate extends React.Component {
             .then((response) => {this.setState({
                 description: response.data.description,
                 targetDate: moment(response.data.targetDate).format("YYYY-MM-DD"),
+                isCompleted: response.data.done ? "Yes" : "No",
             })})
             .catch((error) => console.log(error.message));
     }
@@ -37,7 +39,7 @@ export default class TodoUpdate extends React.Component {
             username: username,
             description: values.description,
             targetDate: values.targetDate,
-            isDone: false,
+            done: (values.isCompleted === "Yes") ? true : false,
         };
 
         if (this.state.id == -1) { // Create a new todo task
@@ -64,17 +66,22 @@ export default class TodoUpdate extends React.Component {
             error.targetDate = "Please Enter a Valid Target Date";
         }
 
+        if ((values.isCompleted != "Yes") && (values.isCompleted != "No")) {
+            error.isCompleted = "Please Enter either Yes or No";
+        }
+
         return error;
     }
 
     render() {
+        console.log(this.state);
         return (
             <div>
                 <h1> Task </h1>
 
                 <div className="container">
                     <Formik
-                        initialValues={{description: this.state.description, targetDate: this.state.targetDate}}
+                        initialValues={{description: this.state.description, targetDate: this.state.targetDate, isCompleted: this.state.isCompleted}}
                         onSubmit={this.handleUpdate}
                         validate={this.validateForm}
                         validateOnChange={false}
@@ -85,6 +92,7 @@ export default class TodoUpdate extends React.Component {
                             <Form>
                                 <ErrorMessage name="description" component="div" className="alert alert-warning"/>
                                 <ErrorMessage name="targetDate" component="div" className="alert alert-warning"/>
+                                <ErrorMessage name="isCompleted" component="div" className="alert alert-warning"/>
 
                                 <fieldset className="form-group">
                                     <label> Description </label>
@@ -96,6 +104,14 @@ export default class TodoUpdate extends React.Component {
                                     <Field className="form-control" type="date" name="targetDate"/>
                                 </fieldset>
 
+                                <fieldset className="form-group">
+                                    <label> Is Completed </label>
+                                    <Field className="form-control" as="select" type="text" name="isCompleted">
+                                        <option value="Yes"> Yes </option>
+                                        <option value="No"> No </option>
+                                    </Field>
+                                </fieldset>
+                                
                                 <button className="btn btn-success" type="submit"> Save </button>
                             </Form>
                         )}
