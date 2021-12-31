@@ -26,8 +26,7 @@ export default class Login extends React.Component {
         AuthenticationService.executeAuthorization(this.state.username, this.state.password)
             .then((response) => {
                 window.sessionStorage.setItem("Username", this.state.username);
-                const basicAuthHeader = "Basic " + window.btoa(this.state.username + ':' + this.state.password);
-                AuthenticationService.setupAxiosInterceptors(basicAuthHeader);
+                AuthenticationService.setupAxiosInterceptors(this.state.username, this.state.password);
                 window.location.href=`/welcome/${this.state.username}`;
             })
             .catch((error) => this.setState({

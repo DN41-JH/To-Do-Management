@@ -3,6 +3,7 @@ package com.Jianghuai.rest.webservices.restfulwebservices.basic.auth;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
@@ -13,11 +14,14 @@ public class SpringSecurityConfigurationBasicAuth extends WebSecurityConfigurerA
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
-			.csrf().disable() //Will use the JWT token for this so we will disable this.
+			.csrf().disable()
 			.authorizeRequests()
-			.antMatchers(HttpMethod.OPTIONS,"/**").permitAll() //Any req coming we are enabling it except for options
-				.anyRequest().authenticated()
-				.and()
+			.antMatchers(HttpMethod.GET,"/**").permitAll()
+			.antMatchers(HttpMethod.PUT,"/**").permitAll()
+			.antMatchers(HttpMethod.POST,"/**").permitAll()
+			.antMatchers(HttpMethod.DELETE,"/**").permitAll()
+			.antMatchers(HttpMethod.OPTIONS,"/**").permitAll()
+			.anyRequest().authenticated().and()
 			.httpBasic();
 	}
 }

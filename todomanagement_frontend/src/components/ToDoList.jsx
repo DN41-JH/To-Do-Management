@@ -8,6 +8,10 @@ export default class ToDoList extends React.Component {
         super(props);
     }
 
+    getStyle(targetDate) {
+        return (moment(targetDate).format("YYYY-MM-DD") < moment(new Date()).format("YYYY-MM-DD")) ? {backgroundColor: "red"} : null;
+    }
+
     render() {
         const username = AuthenticationService.getUsername();
 
@@ -29,7 +33,7 @@ export default class ToDoList extends React.Component {
                             this.props.todos.map((todo) => 
                                 <tr key={todo.id}>
                                     <td> {todo.description} </td>
-                                    <td> {moment(todo.targetDate).format("YYYY-MM-DD")} </td>
+                                    <td style={this.getStyle(todo.targetDate)}> {moment(todo.targetDate).format("YYYY-MM-DD")} </td>
                                     <td> {todo.done.toString()} </td>
                                     <td> <button className="btn btn-success" onClick={() => this.props.onGoUpdate(todo.id)}> Update </button>  </td>
                                     <td> <button className="btn btn-warning" onClick={() => this.props.onDelete(username, todo.id)}> Delete </button>  </td>

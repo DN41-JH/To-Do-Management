@@ -1,11 +1,12 @@
 import axios from "../axios";
 
 export const AuthenticationService = {
-    setupAxiosInterceptors(basicAuthHeader) {
-        console.log("starting setupAxiosInterceptorsssssssssssssssssss");
+    setupAxiosInterceptors(username, password) {
+        const basicAuthHeader = "Basic " + window.btoa(username + ':' + password);
+
         axios.interceptors.request.use((config) => {
-                config.headers.authorization = basicAuthHeader;
-                console.log("basicAuthHeader");
+                if (this.isLoggedIn()) config.headers.authorization = basicAuthHeader;
+                console.log(basicAuthHeader);
                 return config;
             }
         );
