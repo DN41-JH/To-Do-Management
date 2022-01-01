@@ -111,7 +111,8 @@ export default class TodoUpdate extends React.Component {
                                     </Field>
                                 </fieldset>
                                 
-                                <button className="btn btn-success" type="submit"> Save </button>
+                                <button className="btn btn-success" style={{ marginRight: '1.5rem' }} type="submit"> Save </button>
+                                <button className="btn btn-warning" style={{ marginLeft: '1.5rem' }} onClick={() => window.location.href="/todos"}> Cancel </button>
                             </Form>
                         )}
                     </Formik>

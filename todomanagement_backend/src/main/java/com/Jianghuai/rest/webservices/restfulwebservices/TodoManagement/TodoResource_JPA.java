@@ -22,9 +22,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 public class TodoResource_JPA {
 	
 	@Autowired
-	private TodoHardcodedService todoService;
-	
-	@Autowired
 	private TodoJPARepository todoJpaRepository;
 	
     // Method: GET
@@ -51,7 +48,7 @@ public class TodoResource_JPA {
 	@PutMapping("/jpa/users/{username}/todos/{id}")
 	public ResponseEntity<Todo> updateTodo(@PathVariable String username, @PathVariable long id, @RequestBody Todo todo) {
 		todo.setUsername(username);
-		Todo todoUpdated = todoJpaRepository.save(todo);
+		todoJpaRepository.save(todo);
 		return new ResponseEntity<Todo>(todo, HttpStatus.OK);
 		
 		// Todo todoUpdated = todoService.updateTodo(todo);
@@ -80,7 +77,7 @@ public class TodoResource_JPA {
 	public ResponseEntity<Void> deleteTodo(@PathVariable String username, @PathVariable long id) {		
 		todoJpaRepository.deleteById(id);
 		return ResponseEntity.noContent().build();
-
+		
 		// return (todoService.deleteById(id) == null) ? (ResponseEntity<Void>) ResponseEntity.notFound() : ResponseEntity.noContent().build();
 	}
 }
