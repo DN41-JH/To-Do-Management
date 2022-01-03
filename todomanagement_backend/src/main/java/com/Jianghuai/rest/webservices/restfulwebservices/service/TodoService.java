@@ -21,7 +21,7 @@ public class TodoService {
 	}
 	
 	public Todo getTodoById(int id) {
-		return repository.getById(id);
+		return repository.findById(id).get();
 	}
 	public List<Todo> getTodosByUsername(String username) {
 		return repository.findByUsername(username);
