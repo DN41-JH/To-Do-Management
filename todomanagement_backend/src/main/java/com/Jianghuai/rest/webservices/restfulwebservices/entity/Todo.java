@@ -30,7 +30,7 @@ public class Todo {
 
 	protected Todo() {
 		
-	}
+	} // This is for avoiding the exception "org.hibernate.InstantiationException: No entity default constructor"
 	
 	public Todo(int id, String username, String description, String targetDate, boolean isDone) {
 		super();
