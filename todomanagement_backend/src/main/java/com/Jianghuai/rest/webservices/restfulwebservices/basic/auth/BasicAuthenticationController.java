@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @CrossOrigin(origins="http://localhost:4200")
 public class BasicAuthenticationController {
-	@GetMapping(path = "/jpa/basic_auth")
+	@GetMapping(path = "/basic_auth")
 	public AuthenticationBean authenticationBean() {
 		return new AuthenticationBean("You Are Authorized!");
 	}

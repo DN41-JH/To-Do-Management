@@ -1,28 +1,38 @@
-package com.Jianghuai.rest.webservices.restfulwebservices.TodoManagement;
+package com.Jianghuai.rest.webservices.restfulwebservices.entity;
 
 import java.util.Objects;
 
 import javax.persistence.Entity;
+import javax.persistence.Table;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
+@Table
 public class Todo {
-	
 	@Id
 	@GeneratedValue
-	private long id;
+	private int id;
 	
 	private String username;
 	private String description;
 	private String targetDate;
 	private boolean isDone;
-	
+
 	protected Todo() {
 		
 	}
 	
-	public Todo(long id, String username, String description, String targetDate, boolean isDone) {
+	public Todo(int id, String username, String description, String targetDate, boolean isDone) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -30,11 +40,11 @@ public class Todo {
 		this.targetDate = targetDate;
 		this.isDone = isDone;
 	}
-	
-	public long getId() {
+
+	public int getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public String getUsername() {
@@ -61,7 +71,7 @@ public class Todo {
 	public void setDone(boolean isDone) {
 		this.isDone = isDone;
 	}
-
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -77,5 +87,5 @@ public class Todo {
 			return false;
 		Todo other = (Todo) obj;
 		return id == other.id;
-	}	
+	}
 }
