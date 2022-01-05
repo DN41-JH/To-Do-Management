@@ -43,8 +43,6 @@ function App() {
 
         </Switch>
 
-        
-
       </Router>
       
       <Footer />
