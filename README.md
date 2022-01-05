@@ -4,3 +4,5 @@ People can spend a lot of time and energy scheduling and managing their activiti
 The frontend component of the creation and deletion of todo task is created with the "Formik" React library, and the backend Spring Boot project is established with dependencies of "Spring Web", "Spring Boot DevTools", "MySQL Driver" and "Spring Data JPA", performing CRUD operations via JPA repository interfaces. A quick initialization of Spring Boot project can be achieved via Spring Initializer https://start.spring.io/. Please refer to "package.json" and "pom.xml" for detailed frontend and backend dependencies in details.
 
 Please note that I specified the frontend to operate on port "localhost 4200" while the backend server on port "localhost 8080".
+
+A demo of the project is available at: https://youtu.be/0wpJ7-pVpZM.
